@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
+import { View, TextInput, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
 const LoginPage = ({ navigation }) => {
@@ -7,69 +7,114 @@ const LoginPage = ({ navigation }) => {
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
-    // You can replace this with your real login logic, like API requests
     console.log('Email:', email);
     console.log('Password:', password);
-
-    // If login is successful, navigate to the home page
     navigation.navigate('Home');
   };
 
   return (
-    <View style={styles.container}>
-      <Animated.Text style={styles.title} entering={FadeIn} exiting={FadeOut}>
-        Login
-      </Animated.Text>
+    <ImageBackground
+      source={{ uri: 'https://source.unsplash.com/800x600/?hospital' }}
+      style={styles.background}
+      resizeMode="cover"
+    >
+      <View style={styles.overlay}>
+        <Animated.Text style={styles.title} entering={FadeIn} exiting={FadeOut}>
+          Welcome Back!
+        </Animated.Text>
 
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-      />
+        <View style={styles.card}>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your email"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+          />
 
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
+          <TextInput
+            style={styles.input}
+            placeholder="Enter your password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+          />
 
-      <Button title="Login" onPress={handleLogin} />
+          <TouchableOpacity style={styles.loginButton} onPress={handleLogin}>
+            <Text style={styles.loginButtonText}>Login</Text>
+          </TouchableOpacity>
 
-      <Animated.Text style={styles.footer}>
-        Don't have an account? <Text style={styles.link}>Sign Up</Text>
-      </Animated.Text>
-    </View>
+          <Text style={styles.footerText}>
+            Don't have an account? <Text style={styles.link}>Sign Up</Text>
+          </Text>
+        </View>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
     flex: 1,
     justifyContent: 'center',
-    padding: 16,
+    alignItems: 'center',
+  },
+  overlay: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   title: {
-    fontSize: 32,
-    textAlign: 'center',
-    marginBottom: 24,
+    fontSize: 28,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#fff',
+  },
+  card: {
+    width: '85%',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    padding: 20,
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 6,
+    elevation: 5,
+    alignItems: 'center',
   },
   input: {
-    height: 40,
-    borderColor: '#ccc',
-    borderWidth: 1,
+    height: 45,
+    width: '90%',
+    backgroundColor: '#f0f0f0',
+    borderRadius: 8,
+    paddingHorizontal: 12,
     marginBottom: 12,
-    paddingHorizontal: 8,
+    fontSize: 16,
   },
-  footer: {
-    marginTop: 16,
+  loginButton: {
+    backgroundColor: '#007bff',
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+    width: '90%',
+    marginTop: 10,
+  },
+  loginButtonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  footerText: {
     textAlign: 'center',
+    marginTop: 12,
+    fontSize: 14,
+    color: '#333',
   },
   link: {
     color: '#007bff',
+    fontWeight: 'bold',
   },
 });
 
