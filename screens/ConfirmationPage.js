@@ -105,3 +105,4 @@ const styles = StyleSheet.create({
 });
 
 export default ConfirmationPage;
+//I have been successful to download the confirmation page in pdf
