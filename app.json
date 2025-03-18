@@ -1,5 +1,23 @@
-{
+ {
   "name": "login-ui",
-  "slug": "login-ui"
+  "slug": "login-ui",
+  "plugins": [
+    "expo-asset"
+  ],
+  "android": {
+    "package": "com.anonymous.loginui"
+  },
+  "expo": {
+    "plugins": [
+      [
+        "expo-file-system",
+        {
+          "permissions": [
+            "WRITE_EXTERNAL_STORAGE",
+            "READ_EXTERNAL_STORAGE"
+          ]
+        }
+      ]
+    ]
+  }
 }
-

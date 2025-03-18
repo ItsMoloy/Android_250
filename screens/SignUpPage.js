@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 
-const LoginPage = ({ navigation }) => {
+const SignUpPage = ({ navigation }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleLogin = () => {
+  const handleSignUp = () => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; // Gmail format regex
     if (!emailRegex.test(email)) {
       alert('Please enter a valid Gmail address.');
+    } else if (password !== confirmPassword) {
+      alert('Passwords do not match');
+    } else if (!username || !password || !confirmPassword) {
+      alert('Please fill in all fields');
     } else {
       console.log('Username:', username);
       console.log('Email:', email);
       console.log('Password:', password);
-      navigation.navigate('Home'); // Proceed to HomePage after validation
+      navigation.navigate('Home'); // Proceed to HomePage after successful sign up
     }
-  };
-
-  const navigateToSignUp = () => {
-    navigation.navigate('SignUp'); // Navigate to the SignUp page when clicked
   };
 
   return (
@@ -30,9 +30,7 @@ const LoginPage = ({ navigation }) => {
       resizeMode="repeat"
     >
       <View style={styles.overlay}>
-        <Animated.Text style={styles.title} entering={FadeIn} exiting={FadeOut}>
-          Hospital Appointment System
-        </Animated.Text>
+        <Text style={styles.title}>Hospital Appointment System</Text>
 
         <View style={styles.card}>
           <TextInput
@@ -58,14 +56,17 @@ const LoginPage = ({ navigation }) => {
             secureTextEntry
           />
 
-          <TouchableOpacity style={styles.button} onPress={handleLogin}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm your password"
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
+            secureTextEntry
+          />
 
-          <Text style={styles.footerText}>
-            Don't have an account?
-            <Text style={styles.link} onPress={navigateToSignUp}> Sign Up</Text>
-          </Text>
+          <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+            <Text style={styles.buttonText}>Sign Up</Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
@@ -125,16 +126,6 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
   },
-  footerText: {
-    textAlign: 'center',
-    marginTop: 12,
-    fontSize: 14,
-    color: '#333',
-  },
-  link: {
-    color: '#007bff',
-    fontWeight: 'bold',
-  },
 });
 
-export default LoginPage;
+export default SignUpPage;
