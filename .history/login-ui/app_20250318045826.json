@@ -1,0 +1,12 @@
+{
+  "name": "login-ui",
+  "slug": "login-ui"
+},
+{
+  "expo": {
+    "android": {
+      "device": "Pixel_2_XL_API_34",
+      "emulatorTimeout": 30000
+    }
+  }
+}
