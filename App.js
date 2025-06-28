@@ -4,9 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import LoginPage from './screens/LoginPage';
 import HomePage from './screens/HomePage';
 import AppointmentPage from './screens/AppointmentPage';
-import { Asset } from 'expo-asset'
+import { Asset } from 'expo-asset';
 import SignUpPage from './screens/SignUpPage';
 import ConfirmationPage from './screens/ConfirmationPage';
+import AIChatScreen from './screens/AIChatScreen'; 
 
 const Stack = createStackNavigator();
 
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen name="SignUp" component={SignUpPage} />
         <Stack.Screen name="Appointment" component={AppointmentPage} />
         <Stack.Screen name="Confirmation" component={ConfirmationPage} />
+        <Stack.Screen name="AIChat" component={AIChatScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -39,8 +39,6 @@ const doctors = [
   { id: '6', name: 'Dr. Shakib Khan', specialty: 'Psychiatrist', image: require('../assets/doctor6.jpeg'), rating: 4.6, experience: '16 years' },
 ];
 
-
-
 const DoctorCard = ({ doctor, selected, onSelect, renderStars }) => {
   return (
     <TouchableOpacity
@@ -64,7 +62,6 @@ const DoctorCard = ({ doctor, selected, onSelect, renderStars }) => {
 const HomePage = ({ navigation }) => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-
 
   const filteredDoctors = doctors.filter((doc) =>
     doc.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -94,7 +91,6 @@ const HomePage = ({ navigation }) => {
     <>
       <StatusBar barStyle="light-content" backgroundColor="#667eea" />
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-
         {/* Header Section */}
         <Animated.View entering={SlideInDown.delay(200)} style={styles.headerSection}>
           <LinearGradient
@@ -134,6 +130,14 @@ const HomePage = ({ navigation }) => {
             onChangeText={setSearchQuery}
           />
         </View>
+
+        {/* AI Chat Shortcut */}
+        <TouchableOpacity
+          style={styles.aiChatButton}
+          onPress={() => navigation.navigate('AIChat')}
+        >
+          <Text style={styles.aiChatText}>💬 Ask AI Anything</Text>
+        </TouchableOpacity>
 
         {/* Doctors Section Header */}
         <Animated.View entering={FadeIn.delay(900)} style={styles.sectionHeader}>
@@ -283,6 +287,19 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 6,
     elevation: 3,
+  },
+  aiChatButton: {
+    backgroundColor: '#764ba2',
+    marginHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 15,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  aiChatText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   sectionHeader: {
     paddingHorizontal: 20,
